@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="../static/fonts/proximanova/proximanova.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/style.css">
+	<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"  type='text/css'>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>AI-Lawyer</title>
+</head>
+<body>
+<section class="header-wrap">
+	<div class="container">
+		<div class="row no-gutters justify-content-between align-items-center">
+			<div class="logo">
+				<a href="/">
+					<img src="../static/images/logo.png" alt="logo" width="290" height="60">
+				</a>
+			</div>
+			<div class="all-solutions dropdown">
+				<a href="#">AI Solutions <span class="caret"></span></a>
+				<div class="dropdown-menu">
+					<a href="../templates/findSOC.html">The SOC Finder</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="banner soc-banner inner-banner">
+	<div class="banner-thumb">
+		<img src="../static/images/inner-banner.jpg" alt="banner" width="1920" height="250">
+	</div>
+	<div class="banner-overlay">
+		<div class="container">
+			<div class="row align-items-center justify-content-center">
+				<div class="banner-text">
+					<h1 class="banner-title">The SOC Finder</h1>
+					<p>Find the SOC code with a click of a button.</p>
+					<div class="banner-action">
+						<div class="action-group d-flex align-items-center">
+							<a href="javascript:;" data-toggle="modal" data-target="#how-to-use">How to use?</a>
+							<a href="javascript:;" data-toggle="modal" data-target="#about-tool">About the tool</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<script>
+	function on(n = 0) {
+		console.log("on : ", n);
+		console.log('data : ', data)
+
+	  document.getElementById("overlay").style.display = "block";
+	}
+	
+	function off() {
+		console.log("off");
+	  document.getElementById("overlay").style.display = "none";
+	}
+	</script>
+<section class="main">
+	<div class="container">
+		<div class="alert-message d-flex" id="responseAlert">
+			<div class="text" id="response"></div>
+			<div class="close-message">
+				<svg class="svg-icon">
+					<use xlink:href="../static/images/svg-sprite.svg#close"></use>
+				</svg>
+			</div>
+		</div>
+		<div class="form-wrapper">
+			<form action="#" method="post" id="socForm">
+				<div class="form-group">
+					<label class="form-label" for="jobDescription">Enter Job Description* :</label>
+					<textarea name="message" class="form-control" id="jobDescription" placeholder="Please enter job description"></textarea>
+				</div>
+				<div class="form-group">
+					<input type="button" name="sumbit" value="Find soc" id="btnFindSoc" class="action-submit" onclick="findSocCallback()">
+				</div>
+			</form>
+			<div class="select-suggestion soc-hidden" id="suggestion-wrapper">
+				<form action="#/socCode" method="post" id="suggestionForm">
+					<div class="soc-hidden hidden-input"></div>
+					<label class="form-label" for="">Select from below suggestions or enter your own*</label>
+					<div class="suggestion-list d-flex">
+						<div class="suggestion-item">
+							<div class="box">
+								<div class="info">
+									<a href="https://www.google.com" target="_blank">
+										<svg class="svg-icon">
+											<use xlink:href="../static/images/svg-sprite.svg#info-circle"></use>
+										</svg>
+									</a>
+								</div>
+								<div class="text">
+									<label for="radio_1">
+										<input type="radio" name="suggestions" class="radio-input" id="radio_1" value="2424, business and financial project management professionals">
+										2424, business and financial project management professionals
+										<span class="checkmark"></span>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="suggestion-item">
+							<div class="box">
+								<div class="info">
+									<a href="https://www.google.com" target="_blank">
+										<svg class="svg-icon">
+											<use xlink:href="../static/images/svg-sprite.svg#info-circle"></use>
+										</svg>
+									</a>
+								</div>
+								<div class="text">
+									<label for="radio_2">
+										3545, sales accounts and business development managers
+										<input type="radio" name="suggestions" class="radio-input" id="radio_2" value="3545, sales accounts and business development managers">
+										<span class="checkmark"></span>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="suggestion-item">
+							<div class="box">
+								<div class="info">
+									<a href="https://www.google.com" target="_blank">
+										<svg class="svg-icon">
+											<use xlink:href="../static/images/svg-sprite.svg#info-circle"></use>
+										</svg>
+									</a>
+								</div>
+								<div class="text">
+									<label for="radio_3">
+										2136, programmers and software development professionals
+										<input type="radio" name="suggestions" class="radio-input" id="radio_3" value="2136, programmers and software development professionals">
+										<span class="checkmark"></span>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="suggestion-item">
+							<div class="box">
+								<div class="info">
+									<a href="#">
+										<svg class="svg-icon">
+											<use xlink:href="../static/images/svg-sprite.svg#info-circle"></use>
+										</svg>
+									</a>
+								</div>
+								<div class="text">
+									<label for="radio_4">
+										1123, production managers and directors in mining and energy
+										<input type="radio" name="suggestions" class="radio-input" id="radio_4" value="1123, production managers and directors in mining and energy">
+										<span class="checkmark"></span>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="suggestion-item">
+							<div class="box">
+								<div class="info">
+									<a href="#">
+										<svg class="svg-icon">
+											<use xlink:href="../static/images/svg-sprite.svg#info-circle"></use>
+										</svg>
+									</a>
+								</div>
+								<div class="text">
+									<label for="radio_5">
+										1122, Production managers and directors in construction
+										<input type="radio" name="suggestions" class="radio-input" id="radio_5" value="1122, Production managers and directors in construction">
+										<span class="checkmark"></span>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="suggestion-item">
+							<div class="box">
+								<div class="info">
+									<a href="#">
+										<svg class="svg-icon">
+											<use xlink:href="../static/images/svg-sprite.svg#info-circle"></use>
+										</svg>
+									</a>
+								</div>
+								<div class="text">
+									<label for="radio_6">
+										1121, Production managers and directors in manufacturing
+										<input type="radio" name="suggestions" class="radio-input" id="radio_6" value="1121, Production managers and directors in manufacturing">
+										<span class="checkmark"></span>
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="or">
+						<span>Or</span>
+					</div>
+					<div class="soc-code">
+						<div class="form-group">
+							<label class="form-label" for="socCode">Enter your own SOC Code*</label>
+							<input type="text" name="soc_code" id="socCode" class="form-control" placeholder="Please enter SOC Code" onclick="checkRadio()">
+						</div>
+						<div class="form-group">
+							<input type="button" name="sumbit" value="Submit" id="btnSubmit" class="action-submit" onclick="submissionCallback()">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div id="myNav" class="overlay">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+			<div class="overlay-content">  			
+			</div>
+
+			<div id="repkey" class="overlay-content-reportkey">  			
+			</div>
+			<div id="prorata" class="overlay-content-subtext">  			
+			</div>
+
+			<div id="legend" class="overlay-content-legend">  			
+			</div>
+		
+		</div>
+	</div>
+</section>
+<footer class="footer-wrap">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="copyright">
+				Copyright © 2021 AI Lawyer
+			</div>
+		</div>
+	</div>
+</footer>
+<div class="modal" tabindex="-1" id="how-to-use">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+  	<button type="button" class="close d-flex align-items-center justify-content-center" data-dismiss="modal" aria-label="Close">
+      	<svg class="svg-icon">
+			<use xlink:href="../static/images/svg-sprite.svg#close"></use>
+		</svg>
+    </button>
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">How to use the tool</div>
+      </div>
+      <div class="modal-body cms-text">
+        <p class="highlight">Steps to select the right SOC Code for you</p>
+        <ul>
+        	<li>Enter your ‘Job Description’</li>
+        	<li>Click on the ‘Find SOC’ button to get your appropriate ’SOC’ code.</li>
+        	<li>You can select the ‘SOC’ code from the options displayed below and click on the ’Submit’ button to store the ‘Job Description’ you have entered.</li>
+        	<li>If you do not see the matching ’SOC’ code you can select ‘None of the above’ button.</li>
+        	<li>You will get a text box where you can enter your correct ‘SOC’ code and submit the ‘Job Description’ which will be stored in the data base with the code you have entered.</li>
+        </ul>
+        <div class="notes"><strong>*Note:</strong> Once the SOC Code submitted, you will not be able to alter the data, it will be submitted and stored to database.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" tabindex="-1" id="about-tool">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+  	<button type="button" class="close d-flex align-items-center justify-content-center" data-dismiss="modal" aria-label="Close">
+	  	<svg class="svg-icon">
+			<use xlink:href="../static/images/svg-sprite.svg#close"></use>
+		</svg>
+	</button>
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">About the tool</div>
+      </div>
+      <div class="modal-body cms-text">
+      	<p>A Skilled Worker (SW) Visa is one of the most applied for visa categories for immigration in the UK. While preparing an SW visa application, an immigration lawyer has to perform a number of checks starting from the case risk assessment to the required legal activities, customer handling, application preparation and finally the submission. The visa application’s preparation takes time and manual effort, as for every job profile, a different eligibility check has to be made according to the UK Immigration System. Different occupations/ job profiles are categorized under the federal statistical standard called the Standard Occupation Classification (SOC). Each job category is assigned an SOC code which defines the benchmark eligibility criteria for an applicant to apply for a SW visa.</p>
+      	<p>For more information please refer to :</p>
+      	<p><a href="https://www.ons.gov.uk/methodology/classificationsandstandards/standardoccupationalclassificationsoc">https://www.ons.gov.uk/methodology/classificationsandstandards/standardoccupationalclassificationsoc</a></p>
+      	<p>To explore the list of UK SOC codes, please refer to : </p>
+      	<p><a href="https://www.gov.uk/government/publications/skilled-worker-visa-eligible-occupations/skilled-worker-visa-eligible-occupations-and-codes">https://www.gov.uk/government/publications/skilled-worker-visa-eligible-occupations/skilled-worker-visa-eligible-occupations-and-codes</a></p>
+      	<p>For every SW visa application, one of the main tasks that a caseworker performs is going through the Job Description/Duties/Roles in the applicant’s job offer and then match it to the correct SOC code manually. We have come up with a solution that automates this task for them with the help of Machine Learning.</p>
+      	<p>Find the SOC code for an applicant on the basis of its Job Profile with a click of a button.</p>
+      	<p>There are a number of SOC codes. We have started with classifying 26 SOC Codes and as we move forward with more data collection, we intend to accommodate all the codes in our tool.</p>
+      	<p><strong>All the information submitted is completely anonymised and purely used for research purpose.</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../static/js/jquery.min.js"></script>
+<script src="../static/js/custom.js"></script>
+<script defer src="../static/js/developer.js"></script>
+</body>
+</html>

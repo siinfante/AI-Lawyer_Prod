@@ -1,0 +1,127 @@
+---
+- name : Setup Application Environment
+  hosts: localhost
+  connection: local 
+  become: True
+  tasks:
+    - name : Updating OS
+      apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+
+    - name : Upgrading OS
+      apt: upgrade=dist force_apt_get=yes
+
+    - name : Install Git
+      apt:
+        name: git
+        state: present
+        update_cache: yes
+  
+    - name : Install python pip3
+      apt:
+        name: python3-pip
+        state: present
+        update_cache: yes
+
+    - name : Install build-essential
+      apt:
+        name: build-essential
+        state: present
+        update_cache: yes
+
+    - name : Install libssl-dev
+      apt:
+        name: libssl-dev
+        state: present
+        update_cache: yes    
+    
+    - name : Install libffi-dev
+      apt:
+        name: libffi-dev
+        state: present
+        update_cache: yes    
+        
+    - name : Install python3-dev
+      apt:
+        name: python3-dev
+        state: present
+        update_cache: yes
+
+    - name : Install apache
+      apt:
+        name: apache2
+        state: present
+        update_cache: yes
+
+    - name : Install libapache2-mod-wsgi-py3
+      apt:
+        name: libapache2-mod-wsgi-py3
+        state: present
+        update_cache: yes
+
+    - name : Install Flask
+      pip:
+        name: flask
+        executable: pip3
+      
+    - name: install flask requests
+      pip: 
+        name: requests
+        executable: pip3
+
+    - name: install flask_SQLAlchemy
+      pip: 
+        name : Flask_SQLAlchemy
+        executable: pip3
+
+    - name: install python-dotenv
+      pip: 
+        name : python-dotenv
+        executable: pip3
+
+    # - name: Copy file with owner and permissions
+    #   ansible.builtin.copy:
+    #     src: ../application.py
+    #     dest: /var/flask-app/application.py
+    #     force: yes 
+
+    - name: Clone a Web App repo
+      ansible.builtin.git:
+        # repo: https://github.com/smritikotiyal/TryFlaskKP.git
+        # repo: https://github.com/smritikotiyal/AYJ_SOCFinder.git
+        repo: https://github.com/smritikotiyal/AI-Lawyer_Prod.git
+        dest: /var/flask-app
+        force: yes
+
+    - name: Install specified python requirements in indicated
+      pip:
+        requirements: /var/flask-app/requirements.txt
+
+    - name: Create symbolic link 
+      file:
+        src: "/var/flask-app"
+        dest: "/var/www/html/flask-app"
+        state: link
+
+    - name: Copy site conf file(flask-app.conf)
+      ansible.builtin.copy:
+        src: /var/flask-app/flask-app.conf
+        dest: /etc/apache2/sites-available/flask-app.conf
+        remote_src: yes
+
+    - name: Change file ownership, group and permissions
+      ansible.builtin.file:
+        path: /var/flask-app
+        owner: www-data
+
+    - name: Disable default Apache site
+      shell: /usr/sbin/a2dissite 000-default.conf
+      notify: Reload Apache
+
+    - name: Enable new site
+      shell: /usr/sbin/a2ensite flask-app.conf
+      notify: Reload Apache
+
+  handlers:
+    - name: Reload Apache
+      shell: systemctl reload apache2
+      become: true
