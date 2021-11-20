@@ -42,3 +42,9 @@ function scrollToTarget() {
     });
 }
 
+$(function() {
+    modalOpen();
+    scrollToTarget();
+    suggestionCheck();
+});
+
