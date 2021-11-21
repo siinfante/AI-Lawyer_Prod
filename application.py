@@ -66,6 +66,7 @@ def index():
 @application.route('/', methods=['POST'])
 @application.route('/results/<id>', methods=['POST'])
 def findSOC(id='findSOC'):
+    print('Py here')
     if(request.form.get('salcal') == "salcal"):
         salCalculate()
         id = 'report'

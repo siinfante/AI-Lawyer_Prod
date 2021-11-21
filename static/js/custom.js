@@ -1,6 +1,5 @@
 function modalOpen(){
     jQuery('[data-toggle="modal"]').on('touchstart click',function (e) {
-        console.log('open here');
         e.preventDefault();
         var modalTarget = jQuery(this).data('target');
         jQuery(modalTarget).addClass('show').siblings().removeClass('show');
@@ -8,13 +7,11 @@ function modalOpen(){
         $('body').append('<div class="modal-backdrop fade show"></div>');
     });
     $('[data-dismiss="modal"]').on('touchstart click', function(){
-        console.log('open here');
         $('.modal').removeClass('show');
         $('body').removeClass('modal-open');
         $('.modal-backdrop').remove();
     });
     $(document).on('touchstart click','.modal', function(e){
-        console.log('open here');
         var closearea = jQuery(".modal-content");
         if (closearea.has(e.target).length === 0) {
             $('.modal').removeClass('show');
